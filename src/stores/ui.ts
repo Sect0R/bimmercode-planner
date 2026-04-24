@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export type Tab = 'selector' | 'expert'
 
 export const useUiStore = defineStore('ui', () => {
-  const drawer = ref(true)
+  const drawer = ref(window.innerWidth >= 960)
   const currentTab = ref<Tab>('selector')
   const filterCategory = ref<string | null>(null)
   const expertCategory = ref<string | null>(null)

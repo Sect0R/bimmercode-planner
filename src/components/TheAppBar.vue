@@ -11,8 +11,7 @@
       hide-details
       flat
       bg-color="#f1f5f9"
-      class="ml-2 rounded-lg"
-      style="max-width: 480px"
+      class="ml-2 rounded-lg search-field"
       clearable
     />
 
@@ -44,3 +43,14 @@ const { t } = useI18n()
 const ui = useUiStore()
 const plan = usePlanStore()
 </script>
+
+<style scoped>
+.search-field {
+  max-width: 480px;
+}
+@media (max-width: 600px) {
+  .search-field {
+    max-width: 100%;
+  }
+}
+</style>

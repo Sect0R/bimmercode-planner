@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="ui.drawer" width="280" color="white" elevation="0" border="end">
+  <v-navigation-drawer v-model="ui.drawer" :permanent="!smAndDown" width="280" color="white" elevation="0" border="end">
     <div class="sidebar-logo">
       <div class="bcp-title">BCP</div>
       <div class="bcp-sub">
@@ -36,7 +36,7 @@
         rounded="lg"
         class="mb-1"
         active-color="primary"
-        @click="ui.switchToExpert()"
+        @click="ui.switchToExpert(); closeOnMobile()"
       >
         <template #append>
           <span class="nav-count" :class="{ 'has-selected': plan.selectedExpert.length > 0 }">
@@ -50,7 +50,7 @@
       <div class="d-flex align-center px-2 mb-2">
         <span class="nav-section-label">{{ t('nav.ecuBlocks') }}</span>
         <v-spacer />
-        <v-btn size="x-small" variant="tonal" color="primary" @click="ui.switchToAll()">
+        <v-btn size="x-small" variant="tonal" color="primary" @click="ui.switchToAll(); closeOnMobile()">
           {{ t('nav.all') }}
         </v-btn>
       </div>
@@ -64,7 +64,7 @@
         rounded="lg"
         class="mb-1"
         active-color="primary"
-        @click="ui.setCategory(cat.id)"
+        @click="ui.setCategory(cat.id); closeOnMobile()"
       >
         <v-list-item-title class="nav-item-title">
           {{ l(cat.title).split('—')[1]?.trim() || l(cat.title) }}
@@ -85,6 +85,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useDisplay } from 'vuetify'
 import { useUiStore } from '@/stores/ui'
 import { usePlanStore } from '@/stores/plan'
 import { useL } from '@/composables/useL'
@@ -92,6 +93,7 @@ import { categories, expertItems } from '@/data/parameters'
 import { setLocale, type Locale } from '@/i18n'
 
 const { t, locale } = useI18n()
+const { smAndDown } = useDisplay()
 const ui = useUiStore()
 const plan = usePlanStore()
 const l = useL()
@@ -101,6 +103,10 @@ const currentLocale = computed(() => locale.value as Locale)
 
 function switchLocale(lang: Locale) {
   setLocale(lang)
+}
+
+function closeOnMobile() {
+  if (smAndDown.value) ui.drawer = false
 }
 </script>
 

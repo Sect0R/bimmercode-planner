@@ -1,7 +1,7 @@
 <template>
   <div
     class="coding-row"
-    :class="{ selected: plan.isSimpleSelected(item.id) }"
+    :class="{ selected: isSelected }"
     @click="toggle"
   >
     <div>
@@ -9,11 +9,14 @@
       <span class="param-code">{{ item.desc }}</span>
     </div>
     <div class="param-info">{{ l(item.info) }}</div>
-    <v-icon class="param-check" size="22">mdi-check-circle</v-icon>
+    <button class="row-toggle-btn" :class="{ 'is-selected': isSelected }" @click.stop="toggle">
+      <v-icon size="20">{{ isSelected ? 'mdi-check-circle' : 'mdi-plus-circle-outline' }}</v-icon>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { usePlanStore } from '@/stores/plan'
 import { useL } from '@/composables/useL'
 import type { SimpleItem, Category } from '@/types'
@@ -25,6 +28,7 @@ const props = defineProps<{
 
 const plan = usePlanStore()
 const l = useL()
+const isSelected = computed(() => plan.isSimpleSelected(props.item.id))
 
 function toggle() {
   plan.toggleSimple({ ...props.item, category: props.category })
@@ -70,10 +74,39 @@ function toggle() {
   font-size: 0.88rem;
   line-height: 1.5;
 }
-.param-check {
-  color: var(--bmw-blue);
-  opacity: 0;
-  transition: opacity 0.15s;
+.row-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  transition: color 0.15s;
 }
-.coding-row.selected .param-check { opacity: 1; }
+.row-toggle-btn:hover { color: var(--bmw-blue); }
+.row-toggle-btn.is-selected { color: var(--bmw-blue); }
+
+@media (max-width: 600px) {
+  .coding-row {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+  }
+  .param-info {
+    grid-column: 1 / 2;
+    font-size: 0.82rem;
+  }
+  .row-toggle-btn {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    align-self: center;
+    padding: 8px;
+  }
+  .row-toggle-btn :deep(.v-icon) {
+    font-size: 26px !important;
+  }
+}
 </style>

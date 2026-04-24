@@ -1,7 +1,9 @@
 <template>
-  <Transition name="toast">
-    <div v-if="ui.toast.visible" class="bcp-toast">{{ ui.toast.text }}</div>
-  </Transition>
+  <Teleport to="body">
+    <Transition name="toast">
+      <div v-if="ui.toast.visible" class="bcp-toast">{{ ui.toast.text }}</div>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">

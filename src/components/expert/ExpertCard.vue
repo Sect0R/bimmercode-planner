@@ -1,5 +1,5 @@
 <template>
-  <div class="expert-card" :class="{ 'expert-card-selected': plan.isExpertSelected(item.id) }">
+  <div class="expert-card" :class="{ 'expert-card-selected': plan.isExpertSelected(item.id) }" @click="plan.toggleExpert(item)">
     <div class="expert-card-header">
       <div class="header-content">
         <span class="expert-block-badge">{{ item.block }}</span>
@@ -72,6 +72,7 @@ const l = useL()
   border-radius: 8px;
   overflow: hidden;
   transition: box-shadow 0.15s, transform 0.15s;
+  cursor: pointer;
 }
 .expert-card:hover {
   box-shadow: 0 4px 18px rgba(28,105,212,0.1);
@@ -184,5 +185,15 @@ const l = useL()
   font-size: 0.78rem;
   color: #78350f;
   line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .expert-card-header .v-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .expert-card-header :deep(.v-icon) {
+    font-size: 28px !important;
+  }
 }
 </style>
