@@ -1,0 +1,27 @@
+:root {
+  --bmw-blue:       #1C69D4;
+  --bmw-dark:       #0f172a;
+  --bg-main:        #f1f5f9;
+  --sidebar-bg:     #ffffff;
+  --card-bg:        #ffffff;
+  --border:         #e2e8f0;
+  --text-main:      #1e293b;
+  --text-muted:     #64748b;
+  --selected-bg:    #EBF3FF;
+  --selected-border: var(--bmw-blue);
+  --row-hover:      #f8fafc;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-main);
+  margin: 0;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
