@@ -2,6 +2,20 @@
 
 A BMW coding reference and plan builder for use with the BimmerCode app.
 
+**Live:** https://bimmercode.netlify.app/
+
+## Screenshots
+
+![Simple mode](docs/screens/1.png)
+
+![Simple mode — BDC block with selections](docs/screens/2.png)
+
+![Expert mode](docs/screens/5.png)
+
+![Expert mode — card detail](docs/screens/7.png)
+
+![Coding plan](docs/screens/8.png)
+
 ## Features
 
 - **Simple mode** — ECU parameter catalog (ACSM, BDC, KOMBI, HU, FRM, etc.). Pick what you need, build a plan.
@@ -62,4 +76,4 @@ src/
 
 ## License
 
-MIT
+GNU General Public License v3.0
